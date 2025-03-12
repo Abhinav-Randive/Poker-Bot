@@ -1,3 +1,4 @@
+import random
 
 class Card: 
     def __init__(self):
@@ -41,7 +42,9 @@ def printDeck(deck):
     for x in deck: 
         x.printCard()
 
-#def shuffleDeck(): 
+def shuffleDeck(deck): 
+    return random.shuffle(deck)
 
-
-printDeck(makeStandardDeck())
+testDeck = makeStandardDeck()
+random.shuffle(testDeck)
+printDeck(testDeck)
