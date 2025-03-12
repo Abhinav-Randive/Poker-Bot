@@ -42,9 +42,6 @@ def printDeck(deck):
     for x in deck: 
         x.printCard()
 
-def shuffleDeck(deck): 
-    return random.shuffle(deck)
-
-testDeck = makeStandardDeck()
-random.shuffle(testDeck)
-printDeck(testDeck)
+#testDeck = makeStandardDeck()
+#random.shuffle(testDeck)
+#printDeck(testDeck)
