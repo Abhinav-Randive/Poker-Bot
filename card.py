@@ -54,12 +54,6 @@ def deal(deck):
 def dealHand(deck, size=5):
     return [deck.pop() for _ in range(size)]
 
-# if __init__ == "main":
-    
-#if __name__ == "__main__":
-#    url = input("Give me a URL: ")
-#    check_and_shorten_url(url)
-
 # Create a deck, shuffle it, and deal a hand
 #testDeck = makeStandardDeck()
 #shuffleDeck(testDeck)
