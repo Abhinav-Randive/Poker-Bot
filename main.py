@@ -1,11 +1,18 @@
 # deal cards
 
 import card as c
-import random
 
 # Create a shuffled deck
 deck = c.makeStandardDeck()
-random.shuffle(deck)
+c.shuffleDeck(deck)
+#c.printDeck(deck)
 
-#print(deck[1].printCard())
-c.printDeck(deck)
+
+def playGame():
+    table = []
+
+    table.append(c.deal(deck))
+    table.append(c.deal(deck))
+
+    c.printDeck(table)
+
