@@ -55,9 +55,11 @@ def dealHand(deck, size=5):
     return [deck.pop() for _ in range(size)]
 
 # Create a deck, shuffle it, and deal a hand
+
 #testDeck = makeStandardDeck()
 #shuffleDeck(testDeck)
 #printDeck(testDeck)
+
 
 # Deal a hand and print it
 #hand = dealHand(testDeck)
