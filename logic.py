@@ -1,52 +1,44 @@
-# PokerGame.py
-from card import Card, makeStandardDeck, shuffleDeck, dealHand
+from card import makeStandardDeck, shuffleDeck, dealHand
 
 def is_flush(hand):
-    suits = [card.get_suit() for card in hand]
+    suits = [card.suit for card in hand]
     return len(set(suits)) == 1
 
-
 def is_straight(hand):
-    values = [card.get_value() for card in hand]
+    values = [int(card.value) for card in hand]
     values.sort()
     return values == list(range(values[0], values[0] + 5))
-
 
 def is_straight_flush(hand):
     return is_flush(hand) and is_straight(hand)
 
-
 def is_royal_flush(hand):
-    values = [card.get_value() for card in hand]
+    values = [int(card.value) for card in hand]
     return is_straight_flush(hand) and values[0] == 1 and values[-1] == 13
 
-
 def is_three_of_a_kind(hand):
-    values = [card.get_value() for card in hand]
+    values = [int(card.value) for card in hand]
     for value in values:
         if values.count(value) == 3:
             return True
     return False
-    
 
 def is_four_of_a_kind(hand):
-    values = [card.get_value() for card in hand]
+    values = [int(card.value) for card in hand]
     for value in values:
         if values.count(value) == 4:
             return True
     return False
 
-
 def is_five_of_a_kind(hand):
-    values = [card.get_value() for card in hand]
+    values = [int(card.value) for card in hand]
     for value in values:
         if values.count(value) == 5:
             return True
     return False
 
-
 def is_full_house(hand):
-    values = [card.get_value() for card in hand]
+    values = [int(card.value) for card in hand]
     for value in values:
         if values.count(value) == 3:
             for value in values:
@@ -54,18 +46,16 @@ def is_full_house(hand):
                     return True
     return False
 
-
 def is_two_pair(hand):
-    values = [card.get_value() for card in hand]
+    values = [int(card.value) for card in hand]
     pairs = 0
     for value in values:
         if values.count(value) == 2:
             pairs += 1
     return pairs == 2
 
-
 def is_one_pair(hand):
-    values = [card.get_value() for card in hand]
+    values = [int(card.value) for card in hand]
     pairs = 0
     for value in values:
         if values.count(value) == 2:
@@ -73,7 +63,7 @@ def is_one_pair(hand):
     return pairs == 1
 
 def is_high_card(hand):
-    values = [card.get_value() for card in hand]
+    values = [int(card.value) for card in hand]
     pairs = 0
     for value in values:
         if values.count(value) == 1:
@@ -95,4 +85,3 @@ print("Is Straight Flush? ", is_straight_flush(hand))
 print("Is Royal Flush? ", is_royal_flush(hand))
 print("Is Three of a Kind? ", is_three_of_a_kind(hand))
 print("Is Four of a Kind? ", is_four_of_a_kind(hand))
-
