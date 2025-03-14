@@ -7,12 +7,30 @@ deck = c.makeStandardDeck()
 c.shuffleDeck(deck)
 #c.printDeck(deck)
 
-
 def playGame():
+
+
+
+    #Deal cards to each player
+
+
+    round()
+
     table = []
 
+    #Deal flop
     table.append(c.deal(deck))
+    table.append(c.deal(deck))
+    table.append(c.deal(deck))
+
+    #Deal turn
+    table.append(c.deal(deck))
+
+    #Deal river
     table.append(c.deal(deck))
 
     c.printDeck(table)
 
+def round():
+    #prompt each player to bet
+    print("test")
