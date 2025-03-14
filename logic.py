@@ -80,12 +80,49 @@ shuffleDeck(testDeck)
 
 # Deal a hand and print it
 hand = dealHand(testDeck)
-print("Hand: ", [str(card) for card in hand])
+hand2 = dealHand(testDeck)
+#print("Hand: ", [str(card) for card in hand])
+
+
+
+def handvalue(hand):
+    if is_royal_flush(hand):
+        return 10
+    elif is_straight_flush(hand):
+        return 9
+    elif is_four_of_a_kind(hand):
+        return 8
+    elif is_full_house(hand):
+        return 7
+    elif is_flush(hand):
+        return 6
+    elif is_straight(hand):
+        return 5
+    elif is_three_of_a_kind(hand):
+        return 4
+    elif is_two_pair(hand):
+        return 3
+    elif is_one_pair(hand):
+        return 2
+    elif is_high_card(hand):
+        return 1
+    else:
+        return 0
 
 # Test hand comparisons
-print("Is Flush? ", is_flush(hand))
-print("Is Straight? ", is_straight(hand))
-print("Is Straight Flush? ", is_straight_flush(hand))
-print("Is Royal Flush? ", is_royal_flush(hand))
-print("Is Three of a Kind? ", is_three_of_a_kind(hand))
-print("Is Four of a Kind? ", is_four_of_a_kind(hand))
+
+hand = dealHand(testDeck)
+hand2 = dealHand(testDeck)
+
+print("Hand 1: ", [str(card) for card in hand])
+print("Hand 2: ", [str(card) for card in hand2])
+
+value1 = handvalue(hand)
+value2 = handvalue(hand2)
+
+if value1 > value2:
+    print("Hand 1 wins!")
+elif value1 < value2:
+    print("Hand 2 wins!")
+else:
+    print("It's a tie!")    
