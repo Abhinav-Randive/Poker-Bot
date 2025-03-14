@@ -19,13 +19,13 @@ def makeStandardDeck():
             newCard = Card()
             match i:
                 case 0:
-                    newCard.suit = "heart <3"
+                    newCard.suit = "heart \u2665"
                 case 1: 
-                    newCard.suit = "spade"
+                    newCard.suit = "spade \u2660"
                 case 2: 
-                    newCard.suit = "club"
+                    newCard.suit = "club \u2663"
                 case 3: 
-                    newCard.suit = "diamond <>"
+                    newCard.suit = "diamond \u2666"
             
             match j: 
                 case 1:
@@ -55,11 +55,9 @@ def dealHand(deck, size=5):
     return [deck.pop() for _ in range(size)]
 
 # Create a deck, shuffle it, and deal a hand
-
 #testDeck = makeStandardDeck()
 #shuffleDeck(testDeck)
 #printDeck(testDeck)
-
 
 # Deal a hand and print it
 #hand = dealHand(testDeck)
