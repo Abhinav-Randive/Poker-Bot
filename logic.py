@@ -1,4 +1,4 @@
-from card import makeStandardDeck, shuffleDeck, dealHand
+from card import makeStandardDeck, shuffleDeck, dealHand, deal
 
 def card_value(card):
     face_card_values = {'Ace': 1, 'Jack': 11, 'Queen': 12, 'King': 13}
@@ -74,55 +74,62 @@ def is_high_card(hand):
             pairs += 1
     return pairs == 5
 
-# Create a deck, shuffle it, and deal a hand
-testDeck = makeStandardDeck()
-shuffleDeck(testDeck)
-
-# Deal a hand and print it
-hand = dealHand(testDeck)
-hand2 = dealHand(testDeck)
-#print("Hand: ", [str(card) for card in hand])
-
-
-
-def handvalue(hand):
+def hand_value(hand):
     if is_royal_flush(hand):
-        return 10
+        return (10, "Royal Flush")
     elif is_straight_flush(hand):
-        return 9
+        return (9, "Straight Flush")
     elif is_four_of_a_kind(hand):
-        return 8
+        return (8, "Four of a Kind")
     elif is_full_house(hand):
-        return 7
+        return (7, "Full House")
     elif is_flush(hand):
-        return 6
+        return (6, "Flush")
     elif is_straight(hand):
-        return 5
+        return (5, "Straight")
     elif is_three_of_a_kind(hand):
-        return 4
+        return (4, "Three of a Kind")
     elif is_two_pair(hand):
-        return 3
+        return (3, "Two Pair")
     elif is_one_pair(hand):
-        return 2
-    elif is_high_card(hand):
-        return 1
+        return (2, "One Pair")
     else:
-        return 0
+        return (1, "High Card")
 
-# Test hand comparisons
+def playGame():
+    # Create a deck, shuffle it, and deal hands
+    testDeck = makeStandardDeck()
+    shuffleDeck(testDeck)
 
-hand = dealHand(testDeck)
-hand2 = dealHand(testDeck)
+    # Deal 2 cards to each player
+    hand1 = dealHand(testDeck, 2)
+    hand2 = dealHand(testDeck, 2)
 
-print("Hand 1: ", [str(card) for card in hand])
-print("Hand 2: ", [str(card) for card in hand2])
+    # Deal 3 community cards
+    card_on_table = dealHand(testDeck, 3)
 
-value1 = handvalue(hand)
-value2 = handvalue(hand2)
+    print("Hand 1: ", [str(card) for card in hand1])
+    print("Hand 2: ", [str(card) for card in hand2])
+    print("Table Cards: ", [str(card) for card in card_on_table])
 
-if value1 > value2:
-    print("Hand 1 wins!")
-elif value1 < value2:
-    print("Hand 2 wins!")
-else:
-    print("It's a tie!")    
+    # Combine hands with community cards
+    combined_hand1 = hand1 + card_on_table
+    combined_hand2 = hand2 + card_on_table
+
+    # Evaluate hand values
+    value1 = hand_value(combined_hand1)
+    value2 = hand_value(combined_hand2)
+
+    print("Hand 1 Value: ", value1)
+    print("Hand 2 Value: ", value2)
+
+    # Determine the winner
+    if value1[0] > value2[0]:
+        print("Hand 1 wins!")
+    elif value1[0] < value2[0]:
+        print("Hand 2 wins!")
+    else:
+        print("It's a tie!")
+
+# Run the game
+playGame()
