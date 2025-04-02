@@ -2,7 +2,7 @@
 We are trying to make a functional Poker bot. The game uses standard poker hand rankings to evaulate the strength of each player's hand.
 
 ## **Features**
-1) Deck Creation: A standard 52-card deck is created with suits (Hearts, Clubs, Spades and Diamonds) and values (Ace, 2-10, J, Q and K). This deck is created randomly everytime the program is run.
+1) **Deck Creation**: A standard 52-card deck is created with suits (Hearts, Clubs, Spades and Diamonds) and values (Ace, 2-10, J, Q and K). This deck is created randomly everytime the program is run.
 
 2) **Shuffling**: The deck is shuffled using 'random' before dealing the cards to the players.
 
