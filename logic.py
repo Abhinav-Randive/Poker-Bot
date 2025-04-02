@@ -1,4 +1,18 @@
 from card import makeStandardDeck, shuffleDeck, dealHand, deal
+from chips import Chips
+import random
+
+botBank = Chips(0, 0, 0, 0)
+playerBank = Chips(0, 0, 0, 0)
+opponentChips = input("How many chips do you want your opponent to have?: \n")
+playerChips = input("How many chips do you want to start with?: \n")
+botBank.add(int(opponentChips))
+playerBank.add(int(playerChips))
+botBank.printChips()
+botBank.printTotal()
+playerBank.printChips()
+playerBank.printTotal()
+
 
 def card_value(card):
     face_card_values = {'Ace': 1, 'Jack': 11, 'Queen': 12, 'King': 13}
@@ -96,7 +110,23 @@ def hand_value(hand):
     else:
         return (1, "High Card")
 
+def decide(min, pot):
+    decide = random.randint(min,20)
+    if decide > 10: 
+        count = botBank.printTotal() /1.5
+        botBank.playChips(random.randint(1, (botBank.printTotal() /1.5)))
+        print("Bot bet: ", count)
+        pot = pot + count
+    if decide < 15:
+        pot = pot + playerBank.printTotal()
+        botBank.allIn()
+        print("Bot went all in")
+    return pot
+
+
 def playGame():
+    # Creates bot odds a value used to determine actions
+    BotOdds = 0
     # Create a deck, shuffle it, and deal hands
     testDeck = makeStandardDeck()
     shuffleDeck(testDeck)
@@ -105,26 +135,12 @@ def playGame():
     hand1 = dealHand(testDeck, 2)
     hand2 = dealHand(testDeck, 2)
 
+    # Deal 3 community cards
+    card_on_table = dealHand(testDeck, 3)
+
     print("Hand 1: ", [str(card) for card in hand1])
     print("Hand 2: ", [str(card) for card in hand2])
-
-    # Betting round 1
-    bet()
-
-    # Deal 3 community cards (The Flop)
-    card_on_table = dealHand(testDeck, 3)
     print("Table Cards: ", [str(card) for card in card_on_table])
-
-    # Betting Round 2
-    bet()
-
-    #Deal Turn (Fourth Street)
-    card_on_table.append(deal(testDeck))
-    bet()
-
-    #Deal River (Fifth Street)
-    card_on_table.append(deal(testDeck))
-    bet()
 
     # Combine hands with community cards
     combined_hand1 = hand1 + card_on_table
@@ -136,17 +152,60 @@ def playGame():
 
     print("Hand 1 Value: ", value1)
     print("Hand 2 Value: ", value2)
+    BotOdds = value2[0] + BotOdds
+    print("Bot Odds: ", BotOdds)
+
+    BetCheck = input("Player Would you like to bet or fold?(bet/fold): ")
+    if BetCheck == "fold":
+        print("Player Folded")
+        print("Nothing happened")
+        return
+    elif BetCheck == "bet":
+        print("Player Bets")
+        BotOdds = BotOdds - 1
+    else:
+        print("Invalid Input")
+        return
+    BetValue = input("How much would you like to bet?: (allin, or number)")
+    pot = 0
+    if BetValue == "allin":
+        pot = pot + playerBank.printTotal()
+        playerBank.playChips(playerBank.allIn())
+        print("Player went all in")
+    else:
+        pot = pot + int(BetValue)
+        playerBank.playChips(int(BetValue))
+        print("Player bet: ", BetValue)
+    
+    pot = decide(BotOdds, pot)
+
+    
+    
+    print("Hand 1: ", [str(card) for card in hand1])
+    print("Hand 1 Value: ", value1)
 
     # Determine the winner
     if value1[0] > value2[0]:
         print("Hand 1 wins!")
+        playerBank.add(pot)
+        print("Bot then Player")
+        botBank.printTotal()
+        playerBank.printTotal()
     elif value1[0] < value2[0]:
         print("Hand 2 wins!")
+        botBank.add(pot)
+        print("Bot then Player")
+
+        botBank.printTotal()
+        playerBank.printTotal()
     else:
         print("It's a tie!")
+        playerBank.add(pot / 2)
+        botBank.add(pot / 2)
+        print("Bot then Player")
 
-def bet():
-    print("filler function; will implement later")
+        botBank.printTotal()
+        playerBank.printTotal()
 
 # Run the game
 playGame()

@@ -66,17 +66,34 @@ class Chips:
                 self.oneCount = 0
                 return total
         def printChips(self):
-                print(self.twentyCount, "twenties", self.tenCount, "tens", self.fiveCount, "fives", self.oneCount, "ones")       
-Player1 = Chips(1000, 20000, 22398, 9423)
-Player1.upperlimit()
-Player1.printChips()
-Player2 = Chips
-Player1.add(53)
-Player1.printChips()
-Player1.playChips(53)
-Player1.printChips()
-Player1.allIn()
-Player1.printChips()
+                print(self.twentyCount, "twenties", self.tenCount, "tens", self.fiveCount, "fives", self.oneCount, "ones")    
+        def printTotal(self):
+                total = (self.fiveCount * 5) + (self.tenCount * 10) + (self.twentyCount * 20) + (self.oneCount * 1)
+                print("Total Chips: ", total)
+                if(total <= 0):
+                        print("You lose")
+                        self.fiveCount = 0
+                        self.tenCount = 0
+                        self.twentyCount = 0
+                        self.oneCount = 0
+                return total
+        
+if __name__ == "__main__":
+                          
+        Player1 = Chips(1000, 20000, 22398, 9423)
+        Player1.upperlimit()
+        Player1.printChips()
+        Player2 = Chips
+        Player1.add(53)
+        Player1.printChips()
+        Player1.playChips(10)
+        total = Player1.printTotal()
+        print(total)
+        Player1.printChips()
+        Player1.add(5392)
+        Player1.printChips()
+        Player1.allIn()
+        Player1.printChips()
 
 
         
