@@ -11,6 +11,7 @@ We are trying to make a functional Poker bot. The game uses standard poker hand 
 4) On the basis of the player's cards and community cards, a hand ranking evaulation begins
 
 5) **Hand Evaluatio**n: Hands are evaluated using standard poker hand ranking (for Texas Hold'Em style)
+
 | Rank          | Example Hand          | Description                              |
 |---------------|-----------------------|------------------------------------------|
 | Royal Flush   | A♥ K♥ Q♥ J♥ 10♥       | Ace-high straight flush                 |
