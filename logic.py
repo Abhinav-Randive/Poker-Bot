@@ -105,12 +105,26 @@ def playGame():
     hand1 = dealHand(testDeck, 2)
     hand2 = dealHand(testDeck, 2)
 
-    # Deal 3 community cards
-    card_on_table = dealHand(testDeck, 3)
-
     print("Hand 1: ", [str(card) for card in hand1])
     print("Hand 2: ", [str(card) for card in hand2])
+
+    # Betting round 1
+    bet()
+
+    # Deal 3 community cards (The Flop)
+    card_on_table = dealHand(testDeck, 3)
     print("Table Cards: ", [str(card) for card in card_on_table])
+
+    # Betting Round 2
+    bet()
+
+    #Deal Turn (Fourth Street)
+    card_on_table.append(deal(testDeck))
+    bet()
+
+    #Deal River (Fifth Street)
+    card_on_table.append(deal(testDeck))
+    bet()
 
     # Combine hands with community cards
     combined_hand1 = hand1 + card_on_table
@@ -130,6 +144,9 @@ def playGame():
         print("Hand 2 wins!")
     else:
         print("It's a tie!")
+
+def bet():
+    print("filler function; will implement later")
 
 # Run the game
 playGame()
