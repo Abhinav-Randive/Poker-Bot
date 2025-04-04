@@ -113,13 +113,13 @@ def hand_value(hand):
 def decide(min, pot):
     decide = random.randint(min,20)
     if decide > 10: 
-    #    val = botBank.giveTotal()
+        val = botBank.giveTotal()
         count = val /1.5
-        botBank.playChips(random.randint(1, count))
+        botBank.playChips(random.randint(1, int(count)))
         print("Bot bet: ", count)
         pot = pot + count
     if decide < 15:
-    #    val = playerBank.giveTotal()
+        val = playerBank.giveTotal()
         pot = pot + val
         botBank.allIn()
         print("Bot went all in")
@@ -171,7 +171,7 @@ def playGame():
     BetValue = input("How much would you like to bet?: (allin, or number)")
     pot = 0
     if BetValue == "allin":
-    #    val = playerBank.giveTotal()
+        val = playerBank.giveTotal()
         pot = pot + val
         playerBank.playChips(playerBank.allIn())
         print("Player went all in")
