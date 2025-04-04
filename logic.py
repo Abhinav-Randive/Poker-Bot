@@ -113,12 +113,14 @@ def hand_value(hand):
 def decide(min, pot):
     decide = random.randint(min,20)
     if decide > 10: 
-        count = botBank.printTotal() /1.5
-        botBank.playChips(random.randint(1, (botBank.printTotal() /1.5)))
+    #    val = botBank.giveTotal()
+        count = val /1.5
+        botBank.playChips(random.randint(1, count))
         print("Bot bet: ", count)
         pot = pot + count
     if decide < 15:
-        pot = pot + playerBank.printTotal()
+    #    val = playerBank.giveTotal()
+        pot = pot + val
         botBank.allIn()
         print("Bot went all in")
     return pot
@@ -139,7 +141,7 @@ def playGame():
     card_on_table = dealHand(testDeck, 3)
 
     print("Hand 1: ", [str(card) for card in hand1])
-    print("Hand 2: ", [str(card) for card in hand2])
+    #print("Hand 2: ", [str(card) for card in hand2])
     print("Table Cards: ", [str(card) for card in card_on_table])
 
     # Combine hands with community cards
@@ -151,7 +153,7 @@ def playGame():
     value2 = hand_value(combined_hand2)
 
     print("Hand 1 Value: ", value1)
-    print("Hand 2 Value: ", value2)
+    #print("Hand 2 Value: ", value2)
     BotOdds = value2[0] + BotOdds
     print("Bot Odds: ", BotOdds)
 
@@ -169,7 +171,8 @@ def playGame():
     BetValue = input("How much would you like to bet?: (allin, or number)")
     pot = 0
     if BetValue == "allin":
-        pot = pot + playerBank.printTotal()
+    #    val = playerBank.giveTotal()
+        pot = pot + val
         playerBank.playChips(playerBank.allIn())
         print("Player went all in")
     else:
@@ -178,16 +181,21 @@ def playGame():
         print("Player bet: ", BetValue)
     
     pot = decide(BotOdds, pot)
+    print("Current Pot: ", pot)
 
     
     
     print("Hand 1: ", [str(card) for card in hand1])
     print("Hand 1 Value: ", value1)
+    print("Hand 2: ", [str(card) for card in hand2])
+
+    print("Hand 2 Value: ", value2)
 
     # Determine the winner
     if value1[0] > value2[0]:
         print("Hand 1 wins!")
         playerBank.add(pot)
+        playerBank.printTotal()
         print("Bot then Player")
         botBank.printTotal()
         playerBank.printTotal()

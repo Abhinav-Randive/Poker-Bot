@@ -77,6 +77,10 @@ class Chips:
                         self.twentyCount = 0
                         self.oneCount = 0
                 return total
+        def giveTotal(self):
+                total = (self.fiveCount * 5) + (self.tenCount * 10) + (self.twentyCount * 20) + (self.oneCount * 1)
+                return total
+
         
 if __name__ == "__main__":
                           
