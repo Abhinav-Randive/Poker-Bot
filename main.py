@@ -34,3 +34,19 @@ def playGame():
 def round():
     #prompt each player to bet
     print("test")
+
+
+def fold():
+    print("Folded.")
+
+def check():
+    print("Check.")
+
+def bet(int):
+    print("bet", int)
+
+def call():
+    print("Called.")
+
+def raisePoker():
+    print("Raised.")
