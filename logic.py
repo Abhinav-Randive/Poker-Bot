@@ -119,7 +119,7 @@ def decide(min, pot):
         print("Bot bet: ", count)
         pot = pot + count
     if decide < 15:
-        val = playerBank.giveTotal()
+        val = botBank.giveTotal()
         pot = pot + val
         botBank.allIn()
         print("Bot went all in")
@@ -140,7 +140,7 @@ def playGame():
     # Deal 3 community cards
     card_on_table = dealHand(testDeck, 3)
 
-    print("Hand 1: ", [str(card) for card in hand1])
+    print("\nHand 1: ", [str(card) for card in hand1])
     #print("Hand 2: ", [str(card) for card in hand2])
     print("Table Cards: ", [str(card) for card in card_on_table])
 
@@ -152,7 +152,7 @@ def playGame():
     value1 = hand_value(combined_hand1)
     value2 = hand_value(combined_hand2)
 
-    print("Hand 1 Value: ", value1)
+    print("\nHand 1 Value: ", value1)
     #print("Hand 2 Value: ", value2)
     BotOdds = value2[0] + BotOdds
     print("Bot Odds: ", BotOdds)
@@ -168,20 +168,21 @@ def playGame():
     else:
         print("Invalid Input")
         return
-    BetValue = input("How much would you like to bet?: (allin, or number)")
+    BetValue = input("How much would you like to bet?: (allin, or number) ")
+
     pot = 0
     if BetValue == "allin":
         val = playerBank.giveTotal()
         pot = pot + val
         playerBank.playChips(playerBank.allIn())
-        print("Player went all in")
+        print("\nPlayer went all in")
     else:
         pot = pot + int(BetValue)
         playerBank.playChips(int(BetValue))
-        print("Player bet: ", BetValue)
+        print("\nPlayer bet: ", BetValue)
     
     pot = decide(BotOdds, pot)
-    print("Current Pot: ", pot)
+    print("\n===\nCurrent Pot: ", pot)
 
     
     
@@ -193,24 +194,24 @@ def playGame():
 
     # Determine the winner
     if value1[0] > value2[0]:
-        print("Hand 1 wins!")
+        print("\nHand 1 wins!")
         playerBank.add(pot)
         playerBank.printTotal()
-        print("Bot then Player")
+        print("\nBot then Player")
         botBank.printTotal()
         playerBank.printTotal()
     elif value1[0] < value2[0]:
-        print("Hand 2 wins!")
+        print("\nHand 2 wins!")
         botBank.add(pot)
-        print("Bot then Player")
+        print("\nBot then Player")
 
         botBank.printTotal()
         playerBank.printTotal()
     else:
-        print("It's a tie!")
+        print("\nIt's a tie!")
         playerBank.add(pot / 2)
         botBank.add(pot / 2)
-        print("Bot then Player")
+        print("\n19Bot then Player")
 
         botBank.printTotal()
         playerBank.printTotal()
